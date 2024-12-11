@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación Completa | IntelliVision</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Alexandria', sans-serif;
+            background: linear-gradient(135deg, #9CD2D3 0%, #d1feff 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #000000;
+        }
+        .header p {
+            font-size: 1.2rem;
+            color: #000000;
+        }
+        .content-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        .content-box:hover {
+            transform: translateY(-5px);
+        }
+        .content-box h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        .content-box p {
+            color: #34495e;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        button{
+            font-family: 'Alexandria', sans-serif;
+        }
+        .btn {
+            background: linear-gradient(135deg, #3abed8 0%, #0799B6 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Alexandria', sans-serif;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn:hover {
+            background: linear-gradient(135deg, #0799B6 0%, #114C5F 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 1200px;
+            height: 85vh;
+            display: flex;
+            gap: 2rem;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        .close-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #2c3e50;
+            transition: color 0.3s ease;
+        }
+        .close-btn:hover {
+            color: #e74c3c;
+        }
+        .index-buttons {
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+        .index-btn {
+            background: linear-gradient(135deg, #114C5F 0%, #114C5F 100%);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            text-align: left;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .index-btn:hover {
+            background: linear-gradient(135deg, #4d91a8 0%, #114C5F 100%);
+            transform: translateX(5px);
+            box-shadow: 0 4px 6px #114c5fa9;
+        }
+        #content-container {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+        .section-content {
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #9CD2D3;
+        }
+        .section-content h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        .section-content p {
+            color: #34495e;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            list-style: none; 
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        li {
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            list-style-type: none; 
+        }
+        
+        li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        li p {
+            margin: 0; 
+            font-size: 1rem;
+            color: #2c3e50;
+            line-height: 1.7;
+            text-align: justify;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 1rem;
+            font-family: 'Alexandria', sans-serif;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        thead {
+            background-color: #9CD2D3;
+            color: white;
+            text-align: left;
+        }
+        
+        thead th {
+            padding: 1rem;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s ease;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f4f6f8;
+        }
+        
+        tbody tr:hover {
+            background-color: #eaf2f8;
+        }
+        
+        tbody td {
+            padding: 1rem;
+            color: #2c3e50;
+        }
+        
+        th, td {
+            text-align: left;
+            padding: 1rem;
+        }
+        
+        tfoot {
+            background-color: #34495e;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        tfoot td {
+            padding: 1rem;
+        }
+                
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="img/logo.png" width="150px">
+            <h1>Intellivision</h1>
+            <p>Asistencia de Navegación para Personas Invidentes</p>
+        </div>
+        
+        <div class="content-box">
+            <h2>Acerca del Proyecto</h2>
+            <p>Aplicación móvil para apoyar a personas no videntes en su navegación diaria, mejorando su autonomía, seguridad y calidad de vida mediante el uso de tecnologías avanzadas de reconocimiento de objetos, definicion de rutas y navegación asistida por voz.
+            </p>
+            <button class="btn" onclick="openModal()">Ver Documentación</button>
+            <button class="btn" onclick="openManual()">Manual de Usuario</button>
+        </div>
+    </div>
+
+    <div id="docModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div class="index-buttons">
+                <button class="index-btn" onclick="showSection('estado-arte')">Estado del Arte</button>
+                <button class="index-btn" onclick="showSection('diagnostico')">Diagnóstico</button>
+                <button class="index-btn" onclick="showSection('caso-estudio')">Descripción del Caso de Estudio</button>
+                <button class="index-btn" onclick="showSection('problematica')">Análisis de la Problemática</button>
+                <button class="index-btn" onclick="showSection('formulacion')">Formulación del Problema</button>
+                <button class="index-btn" onclick="showSection('objetivo-general')">Objetivo General</button>
+                <button class="index-btn" onclick="showSection('objetivos-especificos')">Objetivos Específicos</button>
+                <button class="index-btn" onclick="showSection('cronograma')">Cronograma de Trabajo</button>
+                <button class="index-btn" onclick="showSection('mapa-cultural')">Mapa Cultural</button>
+                <button class="index-btn" onclick="showSection('mapa-trois')">Mapa TROIS</button>
+                <button class="index-btn" onclick="showSection('uml')">Diagramas UML</button>
+                <button class="index-btn" onclick="showSection('design-thinking')">Design Thinking</button>
+                <button class="index-btn" onclick="showSection('req-funcionales')">Requerimientos Funcionales</button>
+                <button class="index-btn" onclick="showSection('req-no-funcionales')">Requerimientos No Funcionales</button>
+                <button class="index-btn" onclick="showSection('tecnologias')">Comparación de Tecnologías</button>
+                <button class="index-btn" onclick="showSection('disenos')">Diseños y Herramientas</button>
+                <button class="index-btn" onclick="showSection('metodologias')">Metodologías</button>
+                <button class="index-btn" onclick="showSection('viabilidad')">Viabilidad</button>
+                <button class="index-btn" onclick="showSection('presupuesto')">Presupuesto</button>
+                <button class="index-btn" onclick="showSection('ods')">Aporte a los ODS</button>
+                <button class="index-btn" onclick="showSection('conclusiones')">Conclusiones y Recomendaciones</button>
+                </div>
+            <div id="content-container"></div>
+        </div>
+    </div>
+
+    <div id="manModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="content-container">
+                <h2>Manual de Usuario IntelliVision</h2>
+                <p>Esta guía te ayudará a utilizar todas las funciones disponibles en la aplicación.</p><br>
+                <h3>Requisitos Previos</h3>
+                <ul>
+                    <li>Un dispositivo Android 4.1 o superior con cámara estándar</li>
+                    <li>Acceso a internet para la sincronización de datos y el uso de GPS</li>
+                    <li>Micrófono habilitado para reconocer los comandos de voz</li>
+                </ul> <br>
+                <h3>Instalación</h3>
+                <ol>
+                    <li>Descarga la aplicación IntelliVision desde el QR</li>
+                    <li>Instala la aplicación en tu dispositivo móvil</li>
+                    <li>Asegúrate de otorgar los permisos necesarios:
+                        <ul>
+                            <li>Acceso al GPS</li>
+                            <li>Uso del micrófono</li>
+                            <li>Acceso a contactos y almacenamiento</li>
+                            <li>Acceso a cámara</li>
+                        </ul>
+                    </li>
+                </ol><br>
+                <h3>Pantalla de Inicio</h3>
+                <p>Opciones Disponibles</p>
+                <ul>
+                    <li>Decir "VISION": Activa la aplicación y verifica el estado del servicio
+                    </li>
+                    <li>Botón "CONTACTO": Abre la lista de contactos favoritos
+                    </li>
+                    <li>Botón "CÁMARA": Inicia la detección de objetos
+                    </li>
+                    <li>Botón "RUTA": Abre la pantalla para gestionar rutas y navegación
+                    </li>
+                    <li>
+                        Listado de comandos: Se muestra al pulsar el botón "VER LISTADO DE COMANDOS"
+                    </li>
+                </ul><br><br>
+                <h3>Solución de Problemas</h3><br>
+                <p>No escucho respuesta tras decir un comando:</p>
+                <ul>
+                    <li>Verifica que el volumen de tu dispositivo esté activado</li>
+                    <li>Confirma que tu conexión a internet sea estable</li>
+                </ul>
+                <br>
+                <p>La aplicación no responde a los comandos:</p>
+                <ul>
+                    <li>Asegúrate de haber otorgado permisos de micrófono</li>
+                    <li>Habla claramente y verifica que no haya ruido de fondo</li>
+                </ul>  
+                <br>
+                <img src="img/apk.png" width="300px"> 
+            </div>
+        </div>
+    </div>
+    <script>
+        const sectionContent = {
+    'estado-arte': '<h3>Estado del Arte</h3><p>Existen diversas aplicaciones para apoyar a personas invidentes, pero presentan limitaciones como dependencia de internet, incompatibilidad con dispositivos antiguos y alta demanda de hardware. A continuación, se resumen algunas de estas aplicaciones y las diferencias con nuestro proyecto:</p><h4>TapTapSee</h4><br><li>  <p><strong>Descripción:</strong> Identifica objetos mediante fotografías y describe el resultado por audio.</p><p><strong>Limitaciones:</strong> Requiere interacción manual, conexión a internet y no proporciona información en tiempo real.</p><p><strong>Diferencias:</strong> Nuestro proyecto ofrece detección en tiempo real y experiencia automatizada sin capturas manuales.</p></li><h4>Seeing AI</h4> <br><li><p><strong>Descripción:</strong> Utiliza inteligencia artificial para describir objetos, personas y emociones, disponible principalmente en iOS.</p> <p><strong>Limitaciones:</strong> Exclusivo para iOS y algunas funciones requieren internet.</p><p><strong>Diferencias:</strong> Nuestro proyecto es para Android, incluye navegación GPS y almacenamiento de rutas.</p></li><br><h4>BeSpecular</h4><br><li><p><strong>Descripción:</strong> Permite enviar fotos a voluntarios para obtener descripciones.</p> <p><strong>Limitaciones:</strong> Depende de la disponibilidad de voluntarios y conexión a internet.</p>   <p><strong>Diferencias:</strong> Nuestro proyecto utiliza machine learning para retroalimentación inmediata y autónoma.</p></li><br><h4>LookOut</h4>  <br>  <li><p><strong>Descripción:</strong> Ayuda a identificar objetos y texto en tiempo real para Android.</p><p><strong>Limitaciones:</strong> Más enfocado en lectura de texto y objetos cercanos.</p><p><strong>Diferencias:</strong> Nuestro proyecto añade navegación GPS, almacenamiento de rutas y comandos de voz.</p> </li><br><h4>Envision</h4><br><li><p><strong>Descripción:</strong> Ofrece lectura de texto, identificación de objetos y más, disponible en Android, iOS y lentes inteligentes.</p><p><strong>Limitaciones:</strong> Interfaz compleja y funciones avanzadas requieren suscripción.</p><p><strong>Diferencias:</strong> Nuestro proyecto simplifica la interfaz, prioriza funcionalidades clave y es gratuito.</p></li>',
+               
+    'solucion': '<h3>Solución Propuesta</h3><p>Se propone el desarrollo de una aplicación móvil complementada con lentes inteligentes que asistan a personas no videntes en su navegación diaria. La aplicación integrará tecnologías avanzadas como reconocimiento de objetos en tiempo real, inteligencia artificial para la clasificación de elementos del entorno, comandos de voz para facilitar la interacción y navegación GPS asistida por Text-to-Speech. Estas funcionalidades permitirán una mayor autonomía y seguridad en el desplazamiento, mejorando significativamente la calidad de vida de los usuarios.</p>',
+   
+    'caso-estudio': '<h3>Descripción del Caso de Estudio</h3><p> El caso de estudio se centra en la movilidad de personas no videntes en Bolivia. Estas personas enfrentan obstáculos como la falta de señales accesibles, infraestructura urbana inadecuada y la ausencia de herramientas tecnológicas adaptadas a sus necesidades. La dependencia de terceros para orientarse y desplazarse limita su independencia y puede generar situaciones de riesgo en su entorno diario.</p>',
+   
+    'diagnostico' : '    <h3>Diagnóstico</h3><strong><p>Descripción del Caso de Estudio</p></strong><p>El caso de estudio se centra en la movilidad de personas no videntes en Bolivia. Estas personas enfrentan obstáculos como la falta de señales accesibles, infraestructura urbana inadecuada y la ausencia de herramientas tecnológicas adaptadas a sus necesidades. La dependencia de terceros para orientarse y desplazarse limita su independencia y puede generar situaciones de riesgo en su entorno diario.</p><strong><p>Análisis de la Problemática</p></strong><p>La problemática central identificada es la falta de herramientas accesibles y tecnológicamente avanzadas que permitan a las personas no videntes desplazarse de manera autónoma y segura en entornos cotidianos. Este problema afecta directamente su calidad de vida, ya que enfrentan riesgos constantes de accidentes debido a la reducción en su capacidad de detectar obstáculos en su camino y la dependencia de asistencia externa para movilizarse de manera segura. Aunque existen algunas soluciones en el mercado, estas suelen ser limitadas en funcionalidad o inaccesibles económicamente, lo que deja a un amplio sector de esta población sin apoyo adecuado. La implementación de un sistema que combine tecnologías avanzadas de reconocimiento de objetos, navegación GPS asistida por voz y comandos intuitivos es crucial para resolver esta necesidad no satisfecha y brindar mayor autonomía a este grupo</p>',
+
+    'problematica': '<h3>Análisis de la Problemática</h3><p> La problemática central identificada es la falta de herramientas accesibles y tecnológicamente avanzadas que permitan a las personas no videntes desplazarse de manera autónoma y segura en entornos cotidianos. Este problema afecta directamente su calidad de vida, ya que enfrentan riesgos constantes de accidentes debido a la reducción en su capacidad de detectar obstáculos en su camino y la dependencia de asistencia externa para movilizarse de manera segura. Aunque existen algunas soluciones en el mercado, estas suelen ser limitadas en funcionalidad o inaccesibles económicamente, lo que deja a un amplio sector de esta población sin apoyo adecuado. La implementación de un sistema que combine tecnologías avanzadas de reconocimiento de objetos, navegación GPS asistida por voz y comandos intuitivos es crucial para resolver esta necesidad no satisfecha y brindar mayor autonomía a este grupo.</p>',
+   
+    'formulacion': '<h3>Formulación del Problema</h3><p>Las personas con pérdida total o parcial de la visión enfrentan serias dificultades para desplazarse de manera segura y autónoma en su vida diaria. La falta de herramientas tecnológicas accesibles y funcionales que les asistan en la detección de obstáculos, la navegación en entornos desconocidos y la comunicación de emergencias incrementa su dependencia en terceros y su exposición a riesgos, afectando negativamente su calidad de vida.</p>',
+   
+    'objetivo-general': '<h3>Objetivo General</h3><p>Desarrollar una aplicación móvil que apoye a personas no videntes en su navegación diaria, mejorando su autonomía, seguridad y calidad de vida mediante el uso de tecnologías avanzadas de reconocimiento de objetos con modelos de machine learning, definición de rutas, contactos favoritos y navegación asistida por voz.</p>',
+   
+    'objetivos-especificos': '<h3>Objetivos Específicos</h3> <ul><li><p>Diseñar y desarrollar una aplicación móvil compatible con dispositivos Android que permite la detección y reconocimiento de objetos en tiempo real.</p</li><li><p>Implementar un sistema de navegación GPS asistida por voz que facilite la movilidad en entornos urbanos y privados.</p></li><li><p>Desarrollar funcionalidades de interacción mediante comandos de voz para garantizar accesibilidad completa.</p></li><li><p>Incorporar una función de almacenamiento de rutas para mejorar la planificación y repetición de trayectos habituales.</p></li><li><p>Crear una solución que permita realizar llamadas de emergencia o a contactos favoritos utilizando comandos de voz.</p></li><li><p>Asegurar que todas las funcionalidades del sistema sean accesibles incluso con conectividad limitada, optimizando su rendimiento para funcionar sin conexión a internet en las funciones clave.</p></li><li><p>Garantizar la usabilidad de la aplicación mediante la integración de estándares internacionales de accesibilidad como WCAG 2.2.</p></li></ul>',
+   
+    'cronograma': '<h3>Cronograma de Trabajo</h3><p>El cronograma de avance y progreso fue realizado utilizando un Diagrama de Gantt que detalla cada tarea realizada por fecha y prioridad. El cronograma está dividido en 5 fases, similares a los sprints, que abarcan desde la definición inicial hasta las últimas pruebas.</p><br><h4> Definición del Proyecto</h4><p>Esta fase inicial abarcó las actividades fundamentales para establecer la base del proyecto, todas las tareas de esta fase se completaron dentro del plazo establecido y alcanzaron el 100% de progreso:</p><br><ul><li><p>Definición de Proyecto</p></li><li><p>Documentación: marco metodológico, TROIS, y la creación del primer Mapa Cultural</p></li><li><p>Conexión de Botones para el flujo base</p></li></ul><br><h4>Definición de Menús</h4><p>Durante esta segunda fase se concentró en el desarrollo de la interfaz siguiendo las recomendaciones de accesibilidad, y la activación de TTS como servicio.</p><br><ul><li><p>Menú Principal (Frontend) y Activación de TTS (Text-to-Speech)</p></li><li><p>Mapa Cultural V2 (Expansión de categorías)</p></li></ul><br><h4>Implementaciones Externas</h4><p>Esta fase marcó el desarrollo técnico avanzado:</p><br><ul><li><p>Testing de Comandos de Voz (App)Implementación de ML Kit y TensorFlow Lite</p></li><li><p>Integración de Direcciones y Mapas</p></li><li><p>Funciones Complementarias (Room y Contactos)</p></li></ul><br><h4>Documentación e Interfaces</h4><br><ul><li><p> Finalización de XML</p></li><li><p>Revisión de Mapa Cultural y TROIS</p></li><li><p>Testing del Flujo Completo</p></li></ul><br><h4>Producción y Mejoras Finales</h4><p>En la etapa final se llevaron a cabo:</p><br><ul><li><p>Producción de Demos (Videos)</p></li><li><p>Testing Completo de Mejoras</p></li><li><p>Elaboración de Trípticos</p></li></ul>',
+   
+    'mapa-cultural': '<h3>Mapa Cultural</h3><img src="img/mapacultural.png" alt="Mapa Cultural">',
+   
+    'mapa-trois': '<h3>Mapa TROIS</h3><strong><p>Lluvia de Ideas</p></strong><img src="img/lluviadeideas.png" alt="Lluvia de Ideas"><strong><p>Mapa Mental 1</p></strong><img src="img/mapamental1.png" alt="Mapa Mental 1"><strong><p>Mapa Mental 2</p></strong><img src="img/mapamental2.png" alt="Mapa Mental 2"><strong><p>Mapa Conceptual</p></strong><img src="img/mapaconceptual.png" alt="Mapa Conceptual>">',
+   
+    'uml': '<h3>Diagramas UML</h3><strong><p>Diagrama de Clases</p></strong><img src="img/diagramaclases.jpg" alt="Diagrama Clases"><strong><p>Diagrama de Casos de Uso</p></strong><img src="img/diagramacasodeuso.jpg" alt="Diagrama Caso Uso">',
+   
+    'design-thinking': '<h3>Design Thinking</h3><h4>Empatía</h4><li>Objetivo: Comprender las necesidades, problemas y desafíos enfrentados por las personas no videntes al interactuar con su entorno.</li> <br><h4>Métodos:</h4> <br><li> Entrevistas: Se realizaron entrevistas a personas con pérdida total y/o parcial de la vista, familiares, para recopilar información sobre sus desafíos cotidianos.</li> <br><li>Observación indirecta: Se analizaron videos y testimonios públicos de personas no videntes para comprender mejor su interacción con el entorno.</li> <br><li>Observación directa en entornos cotidianos como calles y transporte público.</li> <br><li>Mapas de empatía para identificar emociones, pensamientos y comportamientos.</li> <br><h4>Ejemplo de hallazgos:</h4> <br><li>Dificultad para reconocer obstáculos y objetos en el camino. Falta de componentes de reconocimiento de voz para interactuar con la aplicación. Gran dependencia de personas ajenas para movilizarse. Frustración ante la falta de tecnología accesible y confiable.</li>',
+   
+    'req-funcionales': '<h3>Requerimientos Funcionales</h3><p><strong>Captura de Video:</strong><br><li>El dispositivo debe capturar video en tiempo real para el procesamiento y clasificación de imágenes</li><br><strong>Comandos de Voz:</strong><br><li>La aplicación debe reconocer comandos de voz del usuario y ejecutar las acciones correspondientes, como navegación, identificación de objetos y llamadas.</li></strong><br><strong>Reconocimiento de objetos:</strong><br><li>La aplicación debe contar con un modelo de reconocimiento de objetos y procesamiento de imágenes con etiquetas en castellano</li><br><strong>Gestión de Contactos:</strong><br><li>La aplicación debe permitir al usuario sincronizar la lista completa de contactos desde el dispositivo</li><br><strong>Gestión de Contactos Favoritos: </strong><br><li>La aplicación debe almacenar contactos favoritos y  permitir iniciar llamadas mediante comandos de voz como "Llamar favorito 1"</li><br><strong>Gestión de Rutas y Destinos:</strong><br><li>La aplicación debe permitir al usuario buscar, seleccionar y almacenar rutas y destinos para su posterior navegación. Debe incluir una función de navegación paso a paso utilizando el API de Google Maps.</li><br><strong>Asistencia en Tiempo Real:</strong><br><li>La aplicación debe proporcionar retroalimentación visual y auditiva en tiempo real para asistir al usuario durante el uso de las funciones principales.</li></p>',
+            
+    'req-no-funcionales': '<h3>Requerimientos No Funcionales</h3><h4>Rendimiento:</h4><br><ul> <li>La aplicación debe procesar el reconocimiento de objetos en tiempo real con un retraso no mayor a 650 ms por fotograma.</li><li>La respuesta a comandos de voz debe ser inferior a 1 segundo.</li></ul><br><h4>Usabilidad:</h4><br><ul><li>La interfaz debe ser accesible para personas con discapacidades visuales, con soporte completo para tecnologías de asistencia como lectores de pantalla.</li><li>El diseño debe seguir los requisitos de accesibilidad de la WCAG 2.2 nivel AA.</li></ul><br><h4>Compatibilidad:</h4><br><ul>  <li>La aplicación debe ser compatible con dispositivos Android a partir de la versión 4.1 (Jellybean) y superiores.</li><li>Debe soportar los modelos de cámaras estándar en dispositivos móviles.</li></ul><br><h4>Confiabilidad:</h4><br><ul><li>La aplicación debe operar de manera estable durante sesiones continuas de uso de hasta 5 horas.</li></ul><br><h4>Eficiencia Energética:</h4><br><ul><li>La aplicación debe minimizar el consumo de energía utilizando técnicas de optimización como la suspensión de procesos secundarios cuando no están en uso.</li></ul><br><h4>Mantenimiento:</h4><br><ul><li>El código fuente debe seguir estándares de calidad para facilitar la depuración y actualización.</li><li>La documentación técnica y de usuario debe mantenerse actualizada con cada lanzamiento.</li></ul><br><h4>Conectividad:</h4><br><ul><li>La aplicación debe funcionar de manera offline para la función de reconocimiento de objetos.</li><li>La sincronización de contactos, reconocimiento de comandos de voz y la navegación en mapas deben requerir conexión a internet.</li></ul>',
+        
+    'tecnologias': '<h3>Comparación de Tecnologías</h3><h3>IDE de Desarrollo:</h3><h4>Tecnología más reciente:</h4><br><ul><li>Visual Studio Code </li></ul><br><h4>Tecnología que escogimos:</h4><br><ul>  <li>Android Studio Koala</li></ul><br><h4>Motivo:</h4><br><ul><li>Android Studio es el IDE oficial para el desarrollo de aplicaciones Android, ofreciendo herramientas específicas como un emulador integrado, soporte para Gradle y herramientas de diseño intuitivas que optimizan el desarrollo móvil. La versión Koala introduce mejoras en la estabilidad y nuevas herramientas para pruebas. Además este IDE cuenta con documentación al día y soporte de la comunidad para cualquier error o fallo en el funcionamiento.</li></ul><br><h3>Librerías:</h3><h4>Comandos de Voz:</h4><br><ul>  <li>Tecnología más reciente: Google Assistant SDK</li><li>Tecnología que escogimos: SpeechRecognizer</li></ul><br><h4>Motivo:</h4><br><ul>  <li>SpeechRecognizer es una API integrada en Android que permite implementar reconocimiento de voz sin dependencias externas significativas, garantizando funcionalidad confiable y fácil integración con otras herramientas nativas. Google Assistant SDK sólo se empleó en la sección de rutas por su óptima conexión con Google Maps API.</li></ul><br><h4>Ubicación:</h4><br><ul> <li>Tecnología más reciente: Mapbox SDK</li> <li>Tecnología que escogimos: Google Maps API</li></ul><br><h4>Motivo:</h4><br><ul><li>Google Maps API es una solución ampliamente utilizada, confiable y bien documentada que ofrece funciones avanzadas como rutas optimizadas, visualización de mapas y compatibilidad con otros servicios de Google.</li></ul><br><h4>Detección de Objetos:</h4><br><ul><li>Tecnología más reciente: Google Firebase ML KIT</li><li>Tecnología que escogimos: Tensor Flow Lite Mobilenet V1</li></ul><br><h4>Motivo:</h4><br><ul>  <li>TensorFlow Lite es ideal para dispositivos móviles debido a su enfoque en eficiencia y rendimiento. Mobilenet V1 es ligero y altamente optimizado para tareas de detección de objetos en tiempo real con un impacto mínimo en los recursos del dispositivo. Además de la posibilidad de conexión offline.</li></ul><br><h3>Base de Datos:</h3><h4>Tecnología más reciente:</h4><br><ul><li>Firebase Realtime Database</li></ul><br><h4>Tecnología que escogimos:</h4><br><ul><li>Room Database</li></ul><br><h4>Motivo:</h4><br><ul><li>Database permite el manejo de datos locales de forma estructurada con soporte para consultas SQL, lo que es esencial para una funcionalidad offline robusta y eficiente en aplicaciones móviles. Además, se integra fácilmente con otras herramientas de Android. Esta se adhiere más a los principios de accesibilidad para el desarrollo.</li></ul>',
+    
+    'disenos': '<h3>Diseños y Herramientas</h3><h3>Sprints:</h3><h4>Sprint 1:</h4><br><ul>  <li>Configuración del entorno de desarrollo.</li><li>Implementación básica de captura de video.</li>  <li>Integración inicial de TensorFlow Lite para reconocimiento de objetos.</li></ul><br><h4>Sprint 2:</h4><br><ul>  <li>Implementación de comandos de voz.</li><li>Desarrollo de la funcionalidad de navegación asistida.</li><li>Diseño accesible para pantallas principales.</li></ul><br><h4>Sprint 3:</h4><br><ul> <li>Testing de funcionalidades clave.</li><li>Optimización de tiempos de respuesta.</li>  <li>Revisión de cumplimiento de WCAG 2.2.</li></ul>',
+    
+    'metodologias': '<h3>Metodologías</h3><br><h3>SCRUM:</h3><br><h4>Scrum es un marco de trabajo ágil que organiza el desarrollo en sprints, facilitando la entrega incremental del producto.</h4><br><h4>Equipo Scrum:</h4><ul><li>Product Owner: Ana Gracia Villafani</li><li>Scrum Master: Ing. David Mendoza Gutierrez</li><li>Equipo de Desarrollo: Ana Gracia Villafani, Jhair Aguilar, Alejandro Ormachea</li></ul><br><h4>Artefactos Scrum:</h4><br><h5>Product Backlog:</h5><ul><li>Lista priorizada de los requisitos y funcionalidades del proyecto:</li><li><strong>Funcionalidades principales:</strong><ul><li>Captura de video en tiempo real.</li><li>Reconocimiento de objetos mediante TensorFlow Lite.</li><li>Navegación asistida por voz con API de Google Maps.</li><li>Almacenamiento y gestión de rutas.</li><li>Comandos de voz para interacción con la app.</li><li>Llamadas a contactos favoritos.</li></ul></li><li><strong>Requisitos no funcionales:</strong><ul><li>Procesamiento en tiempo real con baja latencia (650 ms máximo por fotograma).</li><li>Compatibilidad con dispositivos Android desde la versión 4.1.</li><li>Interfaz accesible según estándares WCAG 2.2.</li></ul></li><li><strong>Tareas adicionales:</strong><ul><li>Testing de flujo con usuarios reales.</li><li>Documentación técnica y manual de usuario.</li><li>Producción de demos y guías en vídeo.</li></ul></li><li>Responsable: Product Owner</li><li>Estado: Actualizado tras cada Sprint.</li></ul><br><h5>Sprint Backlog:</h5><ul><li>Conjunto de tareas seleccionadas para el sprint actual, basadas en el Product Backlog.</li><li>Responsable: Equipo de Desarrollo</li><li>Estado: Actualizado por Sprint.</li></ul><br><h4>Eventos Scrum:</h4><br><ul><li><strong>Reunión de Review Sprint 1:</strong><ul><li>Definición de nuevas tareas</li><li>Revisión de flujo de la aplicación</li><li>Verificación de cumplimiento de normas de accesibilidad en el flujo</li></ul></li><li><strong>Reunión de Review Sprint 2:</strong><ul><li>Definición de fechas de testing</li><li>Revisión de flujo y diseño frontend de la aplicación</li><li>Verificación de cumplimiento de normas de accesibilidad en el diseño</li></ul></li><li><strong>Reunión de Review de Producto Final:</strong><ul><li>Testing flujo completo</li><li>Testing con usuarios externos</li><li>Pruebas de uso de features sin internet</li></ul></li><li><strong>Reunión de Review de Producto Revisado:</strong><ul><li>Testing flujo completo</li><li>Filmación de Demos y Guías</li><li>Mejoras en la app móvil</li></ul></li></ul><br><h3>XP:</h3><br><h4>Planilla de Prácticas XP:</h4><br><table><thead><tr><th>Práctica XP</th><th>Descripción</th><th>Responsable</th><th>Fecha de Implementación</th><th>Estado</th></tr></thead><tbody><tr><td>Desarrollo Guiado por Pruebas (TDD)</td><td>Escribir pruebas antes de desarrollar el código.</td><td>Equipo de Desarrollo</td><td>24/11/24</td><td>Completo</td></tr><tr><td>Programación en Pareja</td><td>Dos desarrolladores trabajan juntos en el mismo código.</td><td>Jhair Aguilar y Ana Villafani</td><td>01/12/24</td><td>Completo</td></tr><tr><td>Integración Continua</td><td>Integrar y probar el código frecuentemente.</td><td>Equipo de Desarrollo</td><td>08/12/24</td><td>Completo</td></tr><tr><td>Refactorización</td><td>Mejorar el código sin cambiar su funcionalidad.</td><td>Equipo de Desarrollo</td><td>07/12/24</td><td>Completo</td></tr><tr><td>Diseño Simple</td><td>Implementar soluciones simples y efectivas.</td><td>Alejandro Ormachea</td><td>29/12/24</td><td>Completo</td></tr><tr><td>Retroalimentación Continua</td><td>Obtener y aplicar feedback constante.</td><td>Equipo de Desarrollo</td><td>05/12/24</td><td>Completo</td></tr></tbody></table>',
+    
+    'viabilidad': '<h3>Viabilidad</h3><br><h3>Viabilidad Operativa de IntelliVision</h3><br><h4>Identificación de los Usuarios Finales</h4><br><p>Los beneficiarios principales son personas con discapacidad visual en Bolivia. Requieren herramientas accesibles y confiables operadas por comandos de voz.</p><br><ul><li><strong>Receptividad:</strong> Alta disposición según entrevistas y observaciones.</li></ul><br><h4>Integración Operativa</h4><br><ul><li><strong>Recursos Humanos:</strong><ul><li>Interfaz intuitiva con soporte en castellano para reducir capacitaciones.</li><li>Equipo de soporte para problemas de configuración o uso.</li></ul></li><li><strong>Infraestructura Tecnológica:</strong><ul><li>Compatibilidad con Android 4.1 y superior.</li><li>Funciones críticas operativas offline.</li></ul></li></ul><br><h4>Evaluación de la Aceptación y Usabilidad</h4><br><ul><li><strong>Estándares:</strong> Accesibilidad WCAG 2.2 nivel AA.</li><li><strong>Resultados:</strong> Alta satisfacción y facilidad de uso según pruebas piloto.</li></ul><br><h4>Impacto en los Procesos Actuales</h4><br><ul><li><strong>Autonomía:</strong> Menor dependencia de terceros.</li><li><strong>Seguridad:</strong> Alertas auditivas reducen riesgos de accidentes.</li><li><strong>Inclusión:</strong> Acceso a tecnología adaptada y asequible.</li></ul><br><h4>Consideraciones Futuras</h4><br><ul><li><strong>Dispositivos:</strong> Algunos usuarios podrían no tener smartphones compatibles.</li><li><strong>Batería:</strong> El uso continuo afecta dispositivos antiguos.</li></ul>',
+
+    'presupuesto' : '    <h3>Presupuesto</h3><br><strong><p>Tabla de Presupuesto</p></strong> <img src="img/tabla1-1.png" alt="Tabla1-1"><br><img src="img/tabla1-2.png" alt="Tabla1-2"> <br> <strong><p>Horas Trabajadas por Miembro</p></strong><img src="img/horas.png" alt="Grafica Horas"> <br> <strong><p>Costo por Área</p></strong><img src="img/costoarea.png" alt="Costo Área">',
+    
+    'ods': '<h3>Aporte a los ODS</h3><br><p><strong>Objetivo 3. Salud y Bienestar:</strong> Garantizar una vida sana y promover el bienestar para todos en todas las edades.</p><p>Enfocados en aumentar la autonomía y calidad de vida de personas con discapacidad visual mediante tecnología de asistencia móvil.</p><br><p><strong>Objetivo 11. Ciudades y Comunidades Sostenibles:</strong> Lograr que las ciudades sean más inclusivas, seguras, resilientes y sostenibles.</p><p>Promoviendo la inclusión tecnológica y la accesibilidad urbana para personas con discapacidad visual, facilitando su uso en espacios públicos.</p><br><p><strong>Objetivo 16. Paz, Justicia e Instituciones Sólidas:</strong> Promover sociedades justas, pacíficas e inclusivas.</p><p>Demostrando cómo la inclusión tecnológica y la accesibilidad urbana para personas con discapacidad visual es un medio entre el desarrollo sostenible de las ciudades y la construcción de sociedades más justas e inclusivas.</p>',
+    
+    'conclusiones': '<h3>Conclusiones y Recomendaciones</h3> <h3>Conclusiones</h3><p>El proyecto IntelliVision mejora la autonomía de personas con discapacidad visual mediante una app móvil con tecnologías avanzadas como ML Kit, TensorFlow Lite y Google Maps API. Su diseño accesible y eficiente ofrece reconocimiento de objetos, navegación GPS y gestión de contactos en un solo lugar.</p><ul><li><strong>Reconocimiento en tiempo real:</strong> Identifica objetos del entorno con ML Kit y TensorFlow.</li><li><strong>Navegación GPS:</strong> Direcciones precisas integradas con Google Maps y comandos de voz.</li><li><strong>Contactos favoritos:</strong> Llamadas rápidas por voz mejoran la seguridad.</li><li><strong>Diseño inclusivo:</strong> Cumple estándares WCAG 2.2 para accesibilidad.</li><li><strong>Eficiencia:</strong> Optimizado para bajo consumo de recursos.</li></ul><br><h3>Recomendaciones</h3><ul><li>Expandir el modelo de reconocimiento para más objetos y contextos.</li><li>Optimizar navegación para baja conectividad y mejorar GPS en interiores.</li><li>Integrar servicios de emergencia y alertas automáticas en caso de peligro.</li><li>Realizar pruebas de usabilidad con una población diversa.</li></ul>',
+    
+    'qrs': '<h3>QRs</h3>[QRS]',
+    'comandos': '<h3>Comandos de Voz</h3><p>lista de comandos</p>',
+
+    'objetos': '<h3>Lista de Objetos Reconocidos</h3><p>Detalles del apéndice...</p>',
+    'manual': '<h3>Manual de Usuario</h3><p>Detalles del apéndice...</p>',
+
+};
+
+function openModal() {
+    document.getElementById('docModal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('docModal').style.display = 'none';
+    document.getElementById('content-container').innerHTML = '';
+}
+
+function showSection(section) {
+    const container = document.getElementById('content-container');
+    container.innerHTML = '';
+    
+    const content = `
+        <div class="section-content">
+            ${sectionContent[section]}
+        </div>
+    `;
+    container.innerHTML = content;
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('docModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+}
+
+function openManual(){
+    document.getElementById('manModal').style.display='block';
+}
+function closeModal() {
+    document.getElementById('docModal').style.display = 'none';
+    document.getElementById('manModal').style.display='none';
+    document.getElementById('content-container').innerHTML = '';
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('docModal');
+    const mmodal = document.getElementById('manModal');
+    if (event.target === modal || event.target===mmodal) {
+        closeModal();
+    }
+}
+    </script>
+</body>
+</html>
